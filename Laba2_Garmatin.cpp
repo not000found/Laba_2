@@ -1,11 +1,11 @@
-// ConsoleApplication1.cpp : Defines the entry point for the console application.
-//
+/*
+Несколько изменений внёс, то что было на языке С, исправил на С++.
+*/
 
-#include "stdafx.h"
-#include <conio.h>
-#include <stdio.h>
+
+//#include "stdafx.h"     //Можно вообще убрать
 #include <iostream>
-#include <math.h>
+#include <cmath> 	//Так записывается в С++ библ. <mach.h>. P.S. И если не ошибаюсь, в этой чуть чуть больше функций.
 #include <ctype.h>
 
 
@@ -21,26 +21,18 @@ using namespace std;
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	float a = 0;
-	float b = 0;
-	float c = 0;
-	float p = 0;
-	float sq = 0;
-	float hig = 0;
-	float med = 0;
-	float bis = 0;
-	float ch = 0;
+	float a, b, c, p, sq, hig, med, bis, ch = 0;
 	char quest;
 
 beg:
-	ask:
+ask :
 	cout << "Введите стороны треугольника: \n";
 	cout << "A: "; cin >> a;
 
 	ch = chek(a);                                                   //Проверка на букву А
 	if (ch == 1){
 		cout << "Вы ввели сивол или букву. Введите число.\n\n";
-		_getch();
+		system("pause");					//Тоже что и _getch(), находится в библиотеке <iostream>
 		system("cls");
 		goto beg;
 	}
@@ -50,7 +42,7 @@ beg:
 	ch = chek(b);                                                   //Проверка на букву B
 	if (ch == 1){
 		cout << "Вы ввели сивол или букву. Введите число.\n\n";
-		_getch();
+		system("pause");
 		system("cls");
 		goto beg;
 	}
@@ -60,7 +52,7 @@ beg:
 	ch = chek(c);                                                    //Проверка на букву C
 	if (ch == 1){
 		cout << "Вы ввели сивол или букву. Введите число.\n\n";
-		_getch();
+		system("pause");
 		system("cls");
 		goto beg;
 	}
@@ -69,7 +61,7 @@ beg:
 
 	if (a < 1 || b < 1 || c < 1){                                   //Проверака сторон > 0
 		cout << "Одна или несколько сторон меньше 1. Повторите ввод.\n";
-		_getch();
+		system("pause");
 		system("cls");
 		goto beg;
 	}
@@ -77,7 +69,7 @@ beg:
 
 	if (!((a + b) > c) || !((a + c) > b) || !((b + c) > a)){              //Проверка на существования треугольника
 		cout << "Треугольника с такими сторонами существовать не может. Повторите ввод.\n";
-		_getch();
+		system("pause");
 		system("cls");
 		goto beg;
 	}
@@ -88,7 +80,7 @@ beg:
 	cout << "A-" << a << "\n";
 	cout << "B-" << b << "\n";
 	cout << "C-" << c << "\n\n";
-	ask2:
+ask2:
 	cout << "Что найти?\n";
 	cout << "1. Площадь\n";
 	cout << "2. Периметр\n";
@@ -108,17 +100,17 @@ beg:
 		cout << "A-" << a << "\n";
 		cout << "B-" << b << "\n";
 		cout << "C-" << c << "\n\n";
-		cout << "Площадь треугольника "<<sq<<"\n\n\n";
+		cout << "Площадь треугольника " << sq << "\n\n\n";
 		goto ask2;
-		
+
 	case'2':                                                           //Периметр
-		ch = 2*p;
+		ch = 2 * p;
 		system("cls");
 		cout << "У треугольника стороны\n";
 		cout << "A-" << a << "\n";
 		cout << "B-" << b << "\n";
 		cout << "C-" << c << "\n\n";
-		cout << "Периметр треугольника " << ch <<"\n\n\n";
+		cout << "Периметр треугольника " << ch << "\n\n\n";
 		goto ask2;
 
 	case'3':                                                            //Высоты
@@ -162,16 +154,13 @@ beg:
 
 	}
 
-	fin:
+fin:
 	return 0;
 }
 
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////										    Описание функций										    /////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 float chek(float val){               //Функция проверки на букву
 	float ch;
@@ -188,8 +177,8 @@ float chek(float val){               //Функция проверки на бу
 
 
 float pper(float a, float b, float c){      //Функция нахождения полупериметра
-	float p; 
-	p = (a+b+c)/2;
+	float p;
+	p = (a + b + c) / 2;
 	return(p);
 }
 
@@ -209,7 +198,7 @@ ask:
 	cout << "\nК какой стороне проведена искомая высота?\n";
 	cin >> quest;
 	if (quest == 'a' || quest == 'A'){
-		hig = (2*sqrt(p*(p-a)*(p-b)*(p-c)))/a;
+		hig = (2 * sqrt(p*(p - a)*(p - b)*(p - c))) / a;
 		quest = 'A';
 	}
 	else if (quest == 'b' || quest == 'B'){
@@ -244,7 +233,7 @@ ask:
 	cout << "\nК какой стороне проведена искомая медиана?\n";
 	cin >> quest;
 	if (quest == 'a' || quest == 'A'){
-		med = (sqrt(2*b2+2*c2-a2)/2);
+		med = (sqrt(2 * b2 + 2 * c2 - a2) / 2);
 		quest = 'A';
 	}
 	else if (quest == 'b' || quest == 'B'){
@@ -270,11 +259,11 @@ ask:
 	cout << "\nК какой стороне проведена искомая бисектриса?\n";
 	cin >> quest;
 	if (quest == 'a' || quest == 'A'){
-		bis = (sqrt(b*c*p*(p-a)))*2/(b+c);
+		bis = (sqrt(b*c*p*(p - a))) * 2 / (b + c);
 		quest = 'A';
 	}
 	else if (quest == 'b' || quest == 'B'){
-		bis = (sqrt(a*c*p*(p-b))*2/(a+c));
+		bis = (sqrt(a*c*p*(p - b)) * 2 / (a + c));
 		quest = 'B';
 	}
 	else if (quest == 'c' || quest == 'C'){
